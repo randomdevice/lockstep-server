@@ -1,0 +1,19 @@
+[package]
+name = "lockstep-server"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+warp = "0.3"
+clap = { version = "4.5", features = ["derive"] }
+chrono = "0.4.39"
+
+[dependencies.uuid]
+version = "1.11.0"
+features = [
+    "v7",                # Lets you generate random UUIDs, based on Unix timestamp
+    "fast-rng",          # Use a faster (but still sufficiently random) RNG
+    "macro-diagnostics", # Enable better diagnostics for compile-time UUIDs
+]
+
