@@ -17,7 +17,8 @@ pub struct TimesetMgr {
     timestamp: u64,
     //timesets: Vec<&'a Timeset>,
     freqmap: HashMap<NaiveDate, usize>,
-    ordered_timesets: BinaryHeap<Timeset>
+    ordered_timesets: BinaryHeap<Timeset>,
+    timesets: BTreeMap<NaiveDate,Timeset>
 }
 
 impl TimesetMgr {
@@ -45,8 +46,8 @@ impl TimesetMgr {
             //panic!("Failed to add timeset");
             Err(std::fmt::Error)
         } else {
-            self.freqmap.insert(tmst.date, 1);
-            self.ordered_timesets.push(tmst);
+            self.timeset.insert(tmst.date, tmst);
+            self.freqmap.insert(tmst.date,1);
             Ok(())
         }
     }
@@ -61,7 +62,8 @@ impl Default for TimesetMgr {
         timestamp: SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs(),
         current_time: Some(Local::now().time()),
         freqmap: HashMap::new(),
-        ordered_timesets: BinaryHeap::new()
+        ordered_timesets: BinaryHeap::new(),
+        timesets: BinaryMap::new()
       } 
    } 
 }
